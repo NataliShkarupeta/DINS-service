@@ -1,0 +1,20 @@
+{
+  "name": "dins-service",
+  "version": "1.0.0",
+  "description": "Server for DINS-project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NataliShkarupeta/DINS-service.git"
+  },
+  "author": "Natali Shkarupeta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NataliShkarupeta/DINS-service/issues"
+  },
+  "homepage": "https://github.com/NataliShkarupeta/DINS-service#readme"
+}
