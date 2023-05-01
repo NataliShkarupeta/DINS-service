@@ -8,9 +8,10 @@ exports.getConfig=()=>{
 
     dotenv.config({path:path.join(__dirname,"./.env")});
 
-    config={
-        PORT:process.env.PORT
-    }
+    config = {
+      db: {url: process.env.DB_HOST },
+      PORT: process.env.PORT,
+    };
 
 
     return config;
