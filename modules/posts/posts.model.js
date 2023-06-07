@@ -17,13 +17,7 @@ const postShema = new Schema(
     },
     descriptionsEn: {
       type: String,
-    },
-    id: {
-      type: String,
-    },
-    dateStamp: {
-      type: Date,
-    },
+    }
   },
   { versionKey: false, timestamps: true }
 );

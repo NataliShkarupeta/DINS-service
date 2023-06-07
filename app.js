@@ -11,17 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use("/blog",postsRouter);
+app.use("/blog", postsRouter);
 
 
-app.use((req, res,next) => {
+app.use((req, res) => {
   res.status(404).json({ message: "Not found", status: "error", code: 404 });
 });
 
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   if (statusCode === 500) {
-    console.log(err);
+    console.log("errroooorrr!!!!!!",err);
   }
   res.status(statusCode).send({
     status: "error",

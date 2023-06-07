@@ -1,10 +1,10 @@
-const { Post } = require("./posts.model");
 const { createError } = require("http-errors");
+const { addPostServ } = require("./posts.service");
 
 const listPosts = async (req, res) => {
   // return  await Post.find();
 
- return await res.json({
+  return await res.json({
     status: "success",
     code: 200,
     // data: {
@@ -14,19 +14,19 @@ const listPosts = async (req, res) => {
 };
 
 const addPost = async (req, res) => {
-  const { body } = req.body;
+  const data = await addPostServ(req);
 
-  return await res.status(201).json({
+  res.status(201).json({
     status: "success",
     code: 201,
-    // data: {
-    //   result: post,
-    // },
+    data: {
+      result: data,
+    },
   });
 };
 
 const postDelete = async (res, req) => {
-  const { id } = req.params;
+  const { _id } = req.params;
   // const result=
   //    if(!result){
   //  throw createError(404, `post with id = ${id} not found`);
