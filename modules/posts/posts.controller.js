@@ -1,15 +1,15 @@
 const { createError } = require("http-errors");
-const { addPostServ } = require("./posts.service");
+const { addPostServ, getAllServ } = require("./posts.service");
 
 const listPosts = async (req, res) => {
-  // return  await Post.find();
+  const data = await getAllServ(req)
 
   return await res.json({
     status: "success",
     code: 200,
-    // data: {
-    //   result: posts,
-    // },
+    data: {
+      result: data,
+    },
   });
 };
 
