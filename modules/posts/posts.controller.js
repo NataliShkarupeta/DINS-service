@@ -1,8 +1,8 @@
 const { createError } = require("http-errors");
-const { addPostServ, getAllServ } = require("./posts.service");
+const { addPostServ, getAllServ, updatePostServ } = require("./posts.service");
 
 const listPosts = async (req, res) => {
-  const data = await getAllServ(req)
+  const data = await getAllServ(req);
 
   return await res.json({
     status: "success",
@@ -25,7 +25,19 @@ const addPost = async (req, res) => {
   });
 };
 
-const postDelete = async (res, req) => {
+const updatePost = async (req, res) => {
+  const data = await updatePostServ(req);
+
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    data: {
+      result: data,
+    },
+  });
+};
+
+const postDelete = async (req, res) => {
   const { _id } = req.params;
   // const result=
   //    if(!result){
@@ -33,15 +45,7 @@ const postDelete = async (res, req) => {
   //    }
 };
 
-const updatePost = async (res, req) => {
-  const { id } = req.params;
-  const { body } = req.body;
-  // const result=
-  // if (!result) {
-  // throw createError(404, `post with id = ${id} not found`);
-  // }
-};
-const postByID = async (res, req) => {
+const postByID = async (req, res) => {
   const { id } = req.params;
   // if (!result) {
   //  throw createError(404, `post with id = ${id} not found`);
