@@ -22,4 +22,10 @@ const updatePostServ = async (req) => {
   return Post.findByIdAndUpdate(_id, body, { new: true });
 };
 
-module.exports = { addPostServ, getAllServ, updatePostServ };
+const deletePostServ = async (req) => {
+  const _id = req.params.id;
+
+  return Post.findByIdAndDelete({_id})
+};
+
+module.exports = { addPostServ, getAllServ, updatePostServ, deletePostServ };

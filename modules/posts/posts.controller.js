@@ -1,5 +1,10 @@
 const { createError } = require("http-errors");
-const { addPostServ, getAllServ, updatePostServ } = require("./posts.service");
+const {
+  addPostServ,
+  getAllServ,
+  updatePostServ,
+  deletePostServ,
+} = require("./posts.service");
 
 const listPosts = async (req, res) => {
   const data = await getAllServ(req);
@@ -38,11 +43,11 @@ const updatePost = async (req, res) => {
 };
 
 const postDelete = async (req, res) => {
-  const { _id } = req.params;
-  // const result=
-  //    if(!result){
-  //  throw createError(404, `post with id = ${id} not found`);
-  //    }
+  const data = await deletePostServ(req);
+  if (!data) {
+    res.json({ message: "Not found", status: 404 });
+  }
+  res.json({ message: "contact deleted" });
 };
 
 const postByID = async (req, res) => {
