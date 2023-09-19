@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const multer = require("multer");
 const path = require("path");
 
 let config;
@@ -16,3 +17,19 @@ exports.getConfig=()=>{
 
     return config;
 }
+
+const tempDir = path.join(__dirname,"temp");
+
+exports.multerConfig= multer.diskStorage({
+
+destination:(req,file,cb)=>{
+cb(null, tempDir);
+},
+filename:(req,file,cb)=>{
+  cb(null,file.originalname);
+},
+limits:{
+  fileSize:2048
+}
+
+});
