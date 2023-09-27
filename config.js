@@ -19,10 +19,12 @@ exports.getConfig=()=>{
 }
 
 const tempDir = path.join(__dirname,"temp");
+exports.pictureDir = path.join(__dirname, "public","pictures");
 
 exports.multerConfig= multer.diskStorage({
 
 destination:(req,file,cb)=>{
+ 
 cb(null, tempDir);
 },
 filename:(req,file,cb)=>{
@@ -33,3 +35,4 @@ limits:{
 }
 
 });
+

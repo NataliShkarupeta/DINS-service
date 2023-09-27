@@ -2,7 +2,7 @@ const multer = require("multer");
 const { multerConfig } = require("../config");
 
 const upload = multer({
-    storage:multerConfig
-})
+  storage: multerConfig,
+});
 
-module.exports= upload;
+module.exports = upload;

@@ -1,4 +1,4 @@
-const addPictureServ= async()=>{
+const addPictureServ= async(req)=>{
 
 };
 module.exports = {addPictureServ};
