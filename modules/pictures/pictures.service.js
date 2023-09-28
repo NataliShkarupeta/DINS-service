@@ -1,8 +1,7 @@
 const { pictureDir } = require("../../config");
-const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const fs = require("fs/promises");
-const { Picture } = require("./picture.schemas");
+const { Picture } = require("./picture.model");
 
 const addPictureServ = async (req) => {
   const { path: tempUpload, originalname } = req.file;
@@ -18,22 +17,10 @@ const addPictureServ = async (req) => {
     const newPicture = {
       title1,
       descriptions,
-      originalName: originalname,
-      urlImage: `${pictureDir}/${originalname}`,
+      image,
     };
 
     return await Picture.create(newPicture);
-
-    //   const newPicture = {
-    //     title1,
-    //     descriptions,
-    //     image,
-    //     id: uuidv4(),
-    //   };
-
-    //   pictures.push(newPicture);
-
-    // return pictures;
   } catch (error) {
     // await fs.unlink(tempUpload);
   }
