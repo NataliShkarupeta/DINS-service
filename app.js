@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use("/blog", postsRouter);
 app.use("/pictures", picturesRouter);
+app.use(express.static("public"));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found", status: "error", code: 404 });
