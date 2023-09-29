@@ -1,7 +1,7 @@
 const { addPictureServ, listPucturesServ } = require("./pictures.service");
 
-const addPicture = async (req, res) => {
-  const data = await addPictureServ(req);
+const addPicture = (req, res) => {
+  const data = addPictureServ(req);
 
   return res.status(201).json({
     status: "success",

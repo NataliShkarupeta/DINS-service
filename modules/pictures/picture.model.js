@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const pictureSchema = new Schema(
+const pictureModel = new Schema(
   {
     title1: {
       type: String,
@@ -20,4 +20,4 @@ const pictureSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-exports.Picture = model("picture", pictureSchema);
+exports.Picture = model("picture", pictureModel);

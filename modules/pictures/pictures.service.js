@@ -5,11 +5,11 @@ const { Picture } = require("./picture.model");
 
 const addPictureServ = async (req) => {
   const { path: tempUpload, originalname } = req.file;
-  // console.log("originalname", req.file);
-  const image = path.join("pictures", originalname);
-  console.log("pictureDir", image);
-  const { title1, descriptions } = req.body;
   const resultUpload = path.join(pictureDir, originalname);
+
+
+  const image = path.join("pictures", originalname);
+  const { title1, descriptions } = req.body;
 
   try {
     await fs.rename(tempUpload, resultUpload);
@@ -19,10 +19,10 @@ const addPictureServ = async (req) => {
       descriptions,
       image,
     };
-
-    return await Picture.create(newPicture);
+   
+    return  Picture.create(newPicture);
   } catch (error) {
-    // await fs.unlink(tempUpload);
+    await fs.unlink(tempUpload);
   }
 };
 

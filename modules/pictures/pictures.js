@@ -1,13 +1,13 @@
-const express= require('express');
-const multer = require('multer');
-const upload = require("../../middelwares/upload")
-const { addPicture, listPuctures } = require('./pictures.controller');
+const express = require("express");
+const multer = require("multer");
+const upload = require("../../middelwares/upload");
+const { addPicture, listPuctures } = require("./pictures.controller");
 
-const {pictureSchema}= require("./picture.schemas");
-const contrWrapper = require('../../middelwares/contWrapper');
-const validateBody = require('../../middelwares/validateBody');
+const { pictureSchema } = require("./picture.schemas");
+const contrWrapper = require("../../middelwares/contWrapper");
+const validateBody = require("../../middelwares/validateBody");
 
-const picturesRouter= express.Router();
+const picturesRouter = express.Router();
 
 picturesRouter.post(
   "/",
@@ -16,13 +16,6 @@ picturesRouter.post(
   contrWrapper(addPicture)
 );
 
-picturesRouter.get("/",
-// async(req,res)=>{res.json(pictures);}
-listPuctures
-)
+picturesRouter.get("/", contrWrapper(listPuctures));
 
-module.exports =picturesRouter;
-
-
-
-
+module.exports = picturesRouter;
