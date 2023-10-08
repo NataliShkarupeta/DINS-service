@@ -11,6 +11,12 @@ const pictureModel = new Schema(
     descriptions: {
       type: String,
     },
+     TitleEn: {
+      type: String,
+    },
+    descriptionsEn: {
+      type: String,
+    },
     image: {
       type: String,
       required: [true, "is required!"],

@@ -9,7 +9,7 @@ const addPictureServ = async (req) => {
 
 
   const image = path.join("pictures", originalname);
-  const { title1, descriptions } = req.body;
+  const { title1, descriptions, TitleEn, descriptionsEn } = req.body;
 
   try {
     await fs.rename(tempUpload, resultUpload);
@@ -17,6 +17,8 @@ const addPictureServ = async (req) => {
     const newPicture = {
       title1,
       descriptions,
+      TitleEn,
+      descriptionsEn,
       image,
     };
    
