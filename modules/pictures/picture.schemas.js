@@ -10,3 +10,4 @@ const pictureSchema = Joi.object({
 });
 
 module.exports = { pictureSchema };
+

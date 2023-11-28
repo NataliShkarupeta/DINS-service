@@ -1,4 +1,8 @@
-const { addPictureServ, listPucturesServ } = require("./pictures.service");
+const {
+  addPictureServ,
+  listPucturesServ,
+  pictureByIdServ,
+} = require("./pictures.service");
 
 const addPicture = (req, res) => {
   const data = addPictureServ(req);
@@ -23,4 +27,13 @@ const listPuctures = async (req, res) => {
   });
 };
 
-module.exports = { addPicture, listPuctures };
+const pictureById= async(req,res)=>{
+  console.log("paintingId", req.params.paintingId);
+   const data = await pictureByIdServ(req.params.paintingId);
+    if (!data) {
+    return  res.json({ message: "Not found", status: 404 });
+    }
+    return res.json(data);
+}
+
+module.exports = { addPicture, listPuctures, pictureById };

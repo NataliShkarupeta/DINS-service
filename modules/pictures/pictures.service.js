@@ -8,7 +8,7 @@ const addPictureServ = async (req) => {
   const resultUpload = path.join(pictureDir, originalname);
 
 
-  const image = path.join("pictures", originalname);
+  const image = path.join("images", originalname);
   const { title1, descriptions, TitleEn, descriptionsEn } = req.body;
 
   try {
@@ -32,4 +32,21 @@ const listPucturesServ = async (req) => {
   return await Picture.find();
 };
 
-module.exports = { addPictureServ, listPucturesServ };
+
+
+
+const pictureByIdServ = async (paintingId) => {
+  console.log("z e cthdsc")
+  try {
+    
+    const data = Picture.findById(paintingId);
+    if (!data) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { addPictureServ, listPucturesServ, pictureByIdServ };

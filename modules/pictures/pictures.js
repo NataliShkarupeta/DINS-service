@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const upload = require("../../middelwares/upload");
-const { addPicture, listPuctures } = require("./pictures.controller");
+const { addPicture, listPuctures, pictureById } = require("./pictures.controller");
 
 const { pictureSchema } = require("./picture.schemas");
 const contrWrapper = require("../../middelwares/contWrapper");
@@ -17,5 +17,8 @@ picturesRouter.post(
 );
 
 picturesRouter.get("/", contrWrapper(listPuctures));
+
+picturesRouter.get("/:paintingId", contrWrapper(pictureById));
+
 
 module.exports = picturesRouter;
