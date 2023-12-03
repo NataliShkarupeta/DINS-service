@@ -36,7 +36,7 @@ const listPucturesServ = async (req) => {
 
 
 const pictureByIdServ = async (paintingId) => {
-  console.log("z e cthdsc")
+ 
   try {
     
     const data = Picture.findById(paintingId);

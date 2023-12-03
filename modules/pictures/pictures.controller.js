@@ -28,7 +28,6 @@ const listPuctures = async (req, res) => {
 };
 
 const pictureById= async(req,res)=>{
-  console.log("paintingId", req.params.paintingId);
    const data = await pictureByIdServ(req.params.paintingId);
     if (!data) {
     return  res.json({ message: "Not found", status: 404 });

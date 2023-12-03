@@ -21,6 +21,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found", status: "error", code: 404 });
 });
 
+
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   if (statusCode === 500) {
