@@ -2,6 +2,7 @@ const {
   addPictureServ,
   listPucturesServ,
   pictureByIdServ,
+  picturesInStockServ,
 } = require("./pictures.service");
 
 const addPicture = (req, res) => {
@@ -27,12 +28,24 @@ const listPuctures = async (req, res) => {
   });
 };
 
+const picturesInStock=async(req,res)=>{
+   const data = await picturesInStockServ(req);
+   return res.json({
+     status: "success",
+     code: 200,
+     data: {
+       result: data,
+     },
+   }); 
+}
+
 const pictureById= async(req,res)=>{
    const data = await pictureByIdServ(req.params.paintingId);
     if (!data) {
+
     return  res.json({ message: "Not found", status: 404 });
     }
     return res.json(data);
 }
 
-module.exports = { addPicture, listPuctures, pictureById };
+module.exports = { addPicture, listPuctures, pictureById, picturesInStock };

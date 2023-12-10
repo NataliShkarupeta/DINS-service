@@ -11,7 +11,7 @@ const pictureModel = new Schema(
     descriptions: {
       type: String,
     },
-     TitleEn: {
+    TitleEn: {
       type: String,
     },
     descriptionsEn: {
@@ -21,6 +21,17 @@ const pictureModel = new Schema(
       type: String,
       required: [true, "is required!"],
       unique: true,
+    },
+    inStock: {
+      type: String,
+      required: [true, "is required!"],
+    },
+    inStockEn: {
+      type: String,
+      required: [true, "is required!"],
+    },
+    size: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
