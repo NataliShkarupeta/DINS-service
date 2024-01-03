@@ -16,5 +16,6 @@ postsRouter.get("/", contrWrapper(listPosts));
 postsRouter.patch("/:id", contrWrapper(updatePost));
 postsRouter.post("/", validateBody(postSchema), contrWrapper(addPost));
 postsRouter.delete("/:id", contrWrapper(postDelete));
+postsRouter.get("/:postId",contrWrapper(postByID))
 
 module.exports = postsRouter;

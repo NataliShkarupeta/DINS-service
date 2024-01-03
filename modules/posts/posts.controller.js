@@ -4,6 +4,7 @@ const {
   getAllServ,
   updatePostServ,
   deletePostServ,
+  postByIdServ,
 } = require("./posts.service");
 
 const listPosts = async (req, res) => {
@@ -51,17 +52,14 @@ const postDelete = async (req, res) => {
 };
 
 const postByID = async (req, res) => {
-  const { id } = req.params;
-  // if (!result) {
-  //  throw createError(404, `post with id = ${id} not found`);
-  // }
-  return await res.json({
-    status: "success",
-    code: 200,
-    // data: {
-    //   result: post,
-    // },
-  });
+   const data = await postByIdServ(req.params.postId);
+   if (!data) {
+     return res.json({ message: "Not found", status: 404 });
+   }
+   return res.json(data);
 };
+
+
+
 
 module.exports = { updatePost, postDelete, addPost, listPosts, postByID };

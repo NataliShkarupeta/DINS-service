@@ -28,4 +28,24 @@ const deletePostServ = async (req) => {
   return Post.findByIdAndDelete({_id})
 };
 
-module.exports = { addPostServ, getAllServ, updatePostServ, deletePostServ };
+const postByIdServ = async (postId) => {
+ 
+  try {
+    
+    const data = Post.findById(postId);
+    if (!data) {
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  addPostServ,
+  getAllServ,
+  updatePostServ,
+  deletePostServ,
+  postByIdServ,
+};
