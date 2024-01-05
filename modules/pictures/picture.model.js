@@ -30,6 +30,12 @@ const pictureModel = new Schema(
       type: String,
       required: [true, "is required!"],
     },
+    place: {
+      type: Array,
+    },
+    placeEn: {
+      type: Array,
+    },
     size: {
       type: String,
     },

@@ -6,6 +6,7 @@ const {
   listPuctures,
   pictureById,
   picturesInStock,
+  picturesPlaces,
 } = require("./pictures.controller");
 
 const { pictureSchema } = require("./picture.schemas");
@@ -26,8 +27,11 @@ picturesRouter.post(
 picturesRouter.get("/", contrWrapper(listPuctures));
 
 picturesRouter.get("/inStock", contrWrapper(picturesInStock));
+picturesRouter.post("/place", contrWrapper(picturesPlaces));
 
 picturesRouter.get("/:paintingId", contrWrapper(pictureById));
+
+
 
 
 module.exports = picturesRouter;

@@ -3,6 +3,7 @@ const {
   listPucturesServ,
   pictureByIdServ,
   picturesInStockServ,
+  picturesPlacesServ,
 } = require("./pictures.service");
 
 const addPicture = (req, res) => {
@@ -48,4 +49,21 @@ const pictureById= async(req,res)=>{
     return res.json(data);
 }
 
-module.exports = { addPicture, listPuctures, pictureById, picturesInStock };
+const picturesPlaces = async (req, res) => {
+  const data = await picturesPlacesServ(req);
+  return res.json({
+    status: "success",
+    code: 200,
+    data: {
+      result: data,
+    },
+  });
+};
+
+module.exports = {
+  addPicture,
+  listPuctures,
+  pictureById,
+  picturesInStock,
+  picturesPlaces,
+};

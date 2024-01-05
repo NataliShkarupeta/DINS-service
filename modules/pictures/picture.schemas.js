@@ -9,6 +9,8 @@ const pictureSchema = Joi.object({
   dateStamp: Joi.number(),
   inStock: Joi.string().required(),
   inStockEn: Joi.string().required(),
+  place: Joi.string(),
+  placeEn: Joi.string(),
   size: Joi.string(),
 });
 
