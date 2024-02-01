@@ -3,6 +3,18 @@ const path = require("path");
 const fs = require("fs/promises");
 const { Picture } = require("./picture.model");
 
+const updatePictureInfoServ = async (req) => {
+  const _id = req.params.id;
+  const body = req.body;
+  const picture = await Picture.findById({ _id });
+
+  if (!picture) {
+    throw new Error("something wrong");
+  }
+
+  return Picture.findByIdAndUpdate(_id, body, { new: true });
+};
+
 const addPictureServ = async (req) => {
   // console.log(req.body);
   const { path: tempUpload, originalname } = req.file;
@@ -26,7 +38,10 @@ const addPictureServ = async (req) => {
     pl: place,
   }));
   const placesEn = placeEn.split(",");
-  console.log("placesOb", placesOb);
+  let placesObEn = placesEn.map((place) => ({
+    pl: place,
+  }));
+
   try {
     await fs.rename(tempUpload, resultUpload);
 
@@ -39,7 +54,7 @@ const addPictureServ = async (req) => {
       inStock,
       inStockEn,
       place: placesOb,
-      placeEn: placesEn,
+      placeEn: placesObEn,
       size,
     };
 
@@ -59,7 +74,10 @@ const picturesInStockServ = async (req) => {
 };
 
 const picturesPlacesServ = async (req) => {
-  const query = Picture.where({ "place.pl": req.body.spot });
+  const query = Picture.where(
+    { "place.pl": req.body.spot } || { "placeEn.pl": req.body.spot }
+  );
+  console.log("query", req.body.spot);
   const data = await query.find();
 
   //   // $or: [{ place: { $elemMatch: { place: `${spot}` } } }, { inStock: "ні" }],
@@ -85,4 +103,5 @@ module.exports = {
   pictureByIdServ,
   picturesInStockServ,
   picturesPlacesServ,
+  updatePictureInfoServ,
 };

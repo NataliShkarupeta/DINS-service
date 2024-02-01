@@ -4,7 +4,20 @@ const {
   pictureByIdServ,
   picturesInStockServ,
   picturesPlacesServ,
+  updatePictureInfoServ,
 } = require("./pictures.service");
+
+const updatePictureInfo = async (req, res) => {
+  const data = await updatePictureInfoServ(req);
+
+  res.status(200).json({
+    status: "success",
+    code: 200,
+    data: {
+      result: data,
+    },
+  });
+};
 
 const addPicture = (req, res) => {
   const data = addPictureServ(req);
@@ -66,4 +79,5 @@ module.exports = {
   pictureById,
   picturesInStock,
   picturesPlaces,
+  updatePictureInfo,
 };
