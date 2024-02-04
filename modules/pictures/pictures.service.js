@@ -74,13 +74,15 @@ const picturesInStockServ = async (req) => {
 };
 
 const picturesPlacesServ = async (req) => {
-  const query = Picture.where(
-    { "place.pl": req.body.spot } || { "placeEn.pl": req.body.spot }
-  );
-  console.log("query", req.body.spot);
-  const data = await query.find();
-
-  //   // $or: [{ place: { $elemMatch: { place: `${spot}` } } }, { inStock: "ні" }],
+  // const query = Picture.where(
+  //   { "place.pl": req.body.spot } || { "placeEn.pl": req.body.spot }
+  // );
+  // console.log("query", req.body.spot);
+  // const data = await query.find();
+const data = await Picture.find({
+  $or: [{ "place.pl": req.body.spot }, { "placeEn.pl": req.body.spot }],
+});
+ //   // $or: [{ place: { $elemMatch: { place: `${spot}` } } }, { inStock: "ні" }],
   // });
   return data;
 };
