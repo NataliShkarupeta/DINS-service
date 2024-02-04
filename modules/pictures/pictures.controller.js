@@ -5,7 +5,16 @@ const {
   picturesInStockServ,
   picturesPlacesServ,
   updatePictureInfoServ,
+  pictureDeleteServ,
 } = require("./pictures.service");
+
+const pictureDelete = async (req, res) => {
+  const data = await pictureDeleteServ(req);
+  if (!data) {
+    res.json({ message: "Not found", status: 404 });
+  }
+  res.json({ message: "contact deleted" });
+};
 
 const updatePictureInfo = async (req, res) => {
   const data = await updatePictureInfoServ(req);
@@ -80,4 +89,5 @@ module.exports = {
   picturesInStock,
   picturesPlaces,
   updatePictureInfo,
+  pictureDelete,
 };

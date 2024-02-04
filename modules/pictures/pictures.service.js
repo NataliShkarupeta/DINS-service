@@ -98,6 +98,11 @@ const pictureByIdServ = async (paintingId) => {
     console.log(error);
   }
 };
+const pictureDeleteServ = async (req) => {
+  const _id = req.params.id;
+
+  return Picture.findByIdAndDelete({ _id });
+};
 
 module.exports = {
   addPictureServ,
@@ -106,4 +111,5 @@ module.exports = {
   picturesInStockServ,
   picturesPlacesServ,
   updatePictureInfoServ,
+  pictureDeleteServ,
 };
