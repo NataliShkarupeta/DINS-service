@@ -2,6 +2,7 @@ const { pictureDir } = require("../../config");
 const path = require("path");
 const fs = require("fs/promises");
 const { Picture } = require("./picture.model");
+const nodemailer = require("nodemailer");
 
 const updatePictureInfoServ = async (req) => {
   const _id = req.params.id;
@@ -57,8 +58,6 @@ const addPictureServ = async (req) => {
       placeEn: placesObEn,
       size,
     };
-
-    console.log(newPicture);
     return Picture.create(newPicture);
   } catch (error) {
     await fs.unlink(tempUpload);
@@ -66,7 +65,8 @@ const addPictureServ = async (req) => {
 };
 
 const listPucturesServ = async (req) => {
-  return await Picture.find();
+  const { limit = 4, skip = 0 } = req.query;
+  return await Picture.find({}).limit(parseInt(limit)).skip(parseInt(skip));
 };
 
 const picturesInStockServ = async (req) => {
@@ -74,17 +74,45 @@ const picturesInStockServ = async (req) => {
 };
 
 const picturesPlacesServ = async (req) => {
-  // const query = Picture.where(
-  //   { "place.pl": req.body.spot } || { "placeEn.pl": req.body.spot }
-  // );
-  // console.log("query", req.body.spot);
-  // const data = await query.find();
-const data = await Picture.find({
-  $or: [{ "place.pl": req.body.spot }, { "placeEn.pl": req.body.spot }],
-});
- //   // $or: [{ place: { $elemMatch: { place: `${spot}` } } }, { inStock: "ні" }],
-  // });
+  const data = await Picture.find({
+    $or: [{ "place.pl": req.body.spot }, { "placeEn.pl": req.body.spot }],
+  });
   return data;
+};
+
+const sendOrderServ = async (req) => {
+  const {
+    Замовляю = "Купляю",
+    tit,
+    selectedSize = "(якщо купляю розмір фіксований)",
+    adress,
+  } = req.body;
+
+  let massage = `${Замовляю} картину ${tit} розміром ${selectedSize}. Моя адреса: ${adress}`;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.NDM,
+    },
+  });
+  const mailOptions = {
+    from: "natalinardi.kh@gmail.com",
+    to: "natalinardi.kh@gmail.com",
+    subject: "Замовлення!!!",
+    text: massage,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.error(error);
+      return error;
+    } else {
+      console.error("successfully");
+      return `Email sent successfully!`;
+    }
+  });
 };
 
 const pictureByIdServ = async (paintingId) => {
@@ -112,4 +140,5 @@ module.exports = {
   picturesPlacesServ,
   updatePictureInfoServ,
   pictureDeleteServ,
+  sendOrderServ,
 };

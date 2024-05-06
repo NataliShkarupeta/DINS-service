@@ -6,6 +6,7 @@ const {
   picturesPlacesServ,
   updatePictureInfoServ,
   pictureDeleteServ,
+  sendOrderServ,
 } = require("./pictures.service");
 
 const pictureDelete = async (req, res) => {
@@ -51,28 +52,37 @@ const listPuctures = async (req, res) => {
   });
 };
 
-const picturesInStock=async(req,res)=>{
-   const data = await picturesInStockServ(req);
-   return res.json({
-     status: "success",
-     code: 200,
-     data: {
-       result: data,
-     },
-   }); 
-}
+const picturesInStock = async (req, res) => {
+  const data = await picturesInStockServ(req);
+  return res.json({
+    status: "success",
+    code: 200,
+    data: {
+      result: data,
+    },
+  });
+};
 
-const pictureById= async(req,res)=>{
-   const data = await pictureByIdServ(req.params.paintingId);
-    if (!data) {
-
-    return  res.json({ message: "Not found", status: 404 });
-    }
-    return res.json(data);
-}
+const pictureById = async (req, res) => {
+  const data = await pictureByIdServ(req.params.paintingId);
+  if (!data) {
+    return res.json({ message: "Not found", status: 404 });
+  }
+  return res.json(data);
+};
 
 const picturesPlaces = async (req, res) => {
   const data = await picturesPlacesServ(req);
+  return res.json({
+    status: "success",
+    code: 200,
+    data: {
+      result: data,
+    },
+  });
+};
+const sendOrder = async (req, res) => {
+  const data = await sendOrderServ(req);
   return res.json({
     status: "success",
     code: 200,
@@ -90,4 +100,5 @@ module.exports = {
   picturesPlaces,
   updatePictureInfo,
   pictureDelete,
+  sendOrder,
 };

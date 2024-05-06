@@ -9,6 +9,7 @@ const {
   picturesPlaces,
   updatePictureInfo,
   pictureDelete,
+  sendOrder,
 } = require("./pictures.controller");
 
 const { pictureSchema } = require("./picture.schemas");
@@ -24,17 +25,13 @@ picturesRouter.post(
   contrWrapper(addPicture)
 );
 
-
-
 picturesRouter.get("/", contrWrapper(listPuctures));
 picturesRouter.patch("/:id", contrWrapper(updatePictureInfo));
 picturesRouter.get("/inStock", contrWrapper(picturesInStock));
 picturesRouter.post("/place", contrWrapper(picturesPlaces));
+picturesRouter.post("/order", sendOrder);
 picturesRouter.delete("/:id", contrWrapper(pictureDelete));
 
 picturesRouter.get("/:paintingId", contrWrapper(pictureById));
-
-
-
 
 module.exports = picturesRouter;
