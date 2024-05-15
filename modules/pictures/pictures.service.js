@@ -17,7 +17,6 @@ const updatePictureInfoServ = async (req) => {
 };
 
 const addPictureServ = async (req) => {
-  // console.log(req.body);
   const { path: tempUpload, originalname } = req.file;
   const resultUpload = path.join(pictureDir, originalname);
 
