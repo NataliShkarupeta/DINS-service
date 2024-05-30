@@ -4,7 +4,7 @@ const addPostServ = async (req) => {
   const { title, descriptions, titleEn, descriptionsEn } = req.body;
   const newPost = { title, descriptions, titleEn, descriptionsEn };
   //   console.log(newPost);
-  return  Post.create(newPost);
+  return Post.create(newPost);
 };
 
 const getAllServ = async (req) => {
@@ -25,13 +25,11 @@ const updatePostServ = async (req) => {
 const deletePostServ = async (req) => {
   const _id = req.params.id;
 
-  return Post.findByIdAndDelete({_id})
+  return Post.findByIdAndDelete({ _id });
 };
 
 const postByIdServ = async (postId) => {
- 
   try {
-    
     const data = Post.findById(postId);
     if (!data) {
       return null;

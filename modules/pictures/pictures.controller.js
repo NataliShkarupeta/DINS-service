@@ -1,3 +1,4 @@
+
 const {
   addPictureServ,
   listPucturesServ,
@@ -30,7 +31,10 @@ const updatePictureInfo = async (req, res) => {
 };
 
 const addPicture = (req, res) => {
+  // console.log(req.file);
+ 
   const data = addPictureServ(req);
+ 
 
   return res.status(201).json({
     status: "success",

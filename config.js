@@ -21,6 +21,7 @@ exports.getConfig=()=>{
 const tempDir = path.join(__dirname,"temp");
 exports.pictureDir = path.join(__dirname, "public","images");
 
+
 exports.multerConfig= multer.diskStorage({
 
 destination:(req,file,cb)=>{

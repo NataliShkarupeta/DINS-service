@@ -1,8 +1,9 @@
-const { pictureDir } = require("../../config");
+// const { pictureDir } = require("../../config");
 const path = require("path");
 const fs = require("fs/promises");
 const { Picture } = require("./picture.model");
 const nodemailer = require("nodemailer");
+const { uploadFile } = require("../../middelwares/uploadFile");
 
 const updatePictureInfoServ = async (req) => {
   const _id = req.params.id;
@@ -17,10 +18,11 @@ const updatePictureInfoServ = async (req) => {
 };
 
 const addPictureServ = async (req) => {
-  const { path: tempUpload, originalname } = req.file;
-  const resultUpload = path.join(pictureDir, originalname);
-
-  const image = path.join("images", originalname);
+  // const { path: tempUpload, originalname } = req.file;
+  // const resultUpload = path.join(pictureDir, originalname);
+  const file = req.file;
+  // const image = path.join("images", originalname);
+  const image = file.originalname;
   const {
     title1,
     descriptions,
@@ -43,7 +45,8 @@ const addPictureServ = async (req) => {
   }));
 
   try {
-    await fs.rename(tempUpload, resultUpload);
+    await uploadFile(file);
+    // fs.rename(tempUpload, resultUpload);
 
     const newPicture = {
       title1,
@@ -59,7 +62,9 @@ const addPictureServ = async (req) => {
     };
     return Picture.create(newPicture);
   } catch (error) {
-    await fs.unlink(tempUpload);
+     console.error(`${error}`);
+     throw error;
+    // await fs.unlink(tempUpload);
   }
 };
 
