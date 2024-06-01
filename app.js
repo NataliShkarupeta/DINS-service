@@ -16,6 +16,12 @@ app.use("/blog", postsRouter);
 app.use("/pictures", picturesRouter);
 app.use(express.static("public"));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "React app URL");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found", status: "error", code: 404 });
