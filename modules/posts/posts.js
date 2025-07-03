@@ -19,3 +19,4 @@ postsRouter.delete("/:id", contrWrapper(postDelete));
 postsRouter.get("/:postId",contrWrapper(postByID))
 
 module.exports = postsRouter;
+

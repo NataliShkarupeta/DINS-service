@@ -14,7 +14,6 @@ exports.getConfig=()=>{
       PORT: process.env.PORT,
     };
 
-
     return config;
 }
 
