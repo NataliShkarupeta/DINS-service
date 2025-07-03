@@ -13,7 +13,6 @@ exports.getConfig=()=>{
       db: {url: process.env.DB_HOST },
       PORT: process.env.PORT,
     };
-
     return config;
 }
 
